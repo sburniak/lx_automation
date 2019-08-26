@@ -15,33 +15,33 @@ class LxAccess:
     def __init__(self, user, password):
         self._user = user
         self._password = password
-        self._browser = None
+        self.browser = None
 
     def prepare_browser(self, browser):
-        self._browser = browser
+        self.browser = browser
 
     def go_to_page(self, page):
-        self._browser.get(page)
+        self.browser.get(page)
 
     def finish_browser(self):
-        self._browser.quit()
+        self.browser.quit()
 
     def set_username(self):
-        login = self._browser.find_element_by_id("Login")
+        login = self.browser.find_element_by_id("Login")
         login.send_keys(self._user)
 
     def set_password(self):
-        pswd = self._browser.find_element_by_xpath("//input[@id='Password']")
+        pswd = self.browser.find_element_by_xpath("//input[@id='Password']")
         pswd.send_keys(self._password)
 
     def confirm_title_page(self):
-        return self._browser.title == "Portal Pacjenta LUX MED"
+        return self.browser.title == "Portal Pacjenta LUX MED"
 
     def execute_script(self):
-        self._browser.execute_script('document.getElementById("Password").removeAttribute("style")')
+        self.browser.execute_script('document.getElementById("Password").removeAttribute("style")')
 
-    def click_login(self):
-        bttn = self._browser.find_element_by_xpath("//input[@type='submit']")
+    def click_submit(self):
+        bttn = self.browser.find_element_by_xpath("//input[@type='submit']")
         bttn.click()
 
 
@@ -52,6 +52,7 @@ if __name__ == "__main__":
     print(lxA.confirm_title_page())
     lxA.execute_script()
     lxA.set_username()
-    # lxA.set_password()
-    lxA.click_login()
+    lxA.set_password()
+    lxA.click_submit()
+    lxA.go_to_page("https://portalpacjenta.luxmed.pl/PatientPortal/Reservations/Coordination")
     # lxA.finish_browser()
