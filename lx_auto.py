@@ -41,7 +41,7 @@ class LxAccess:
         self._browser.execute_script('document.getElementById("Password").removeAttribute("style")')
 
     def click_login(self):
-        bttn = self._browser.find_element_by_class_name("submit")
+        bttn = self._browser.find_element_by_xpath("//input[@type='submit']")
         bttn.click()
 
 
